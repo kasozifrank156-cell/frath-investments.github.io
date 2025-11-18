@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frath Investments</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f7; color: #333; }
+    header { background: linear-gradient(to right, #0d47a1, #d32f2f); color: white; padding: 20px; text-align: center; }
+    nav { background: #1565c0; padding: 12px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    .hero { position: relative; height: 300px; overflow: hidden; }
+    .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .slide.active { opacity: 1; }
+    .section { padding: 40px; max-width: 1100px; margin: auto; background: white; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+    .card { background: #fafafa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+    .gallery { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+    .gallery img { width: calc(33% - 10px); border-radius: 8px; object-fit: cover; }
+    footer { background: linear-gradient(to right, #0d47a1, #d32f2f); color: white; padding: 20px; text-align: center; margin-top: 40px; }
+    .team-member { display: flex; gap: 20px; align-items: center; margin-top: 20px; }
+    .team-member img { width: 150px; border-radius: 10px; }
+    .team-member div { flex: 1; }
+    
+    /* Logo and Branding Styles */
+    .logo { display: inline-block; font-size: 2.5rem; font-weight: bold; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 10px; }
+    .logo span:first-child { color: #fff; }
+    .logo span:last-child { color: #ffeb3b; }
+    .tagline { font-style: italic; font-size: 1.1rem; margin-top: 5px; }
+    
+    /* Moving Promotional Banner */
+    .promo-banner { background: linear-gradient(45deg, #d32f2f, #ff6659); color: white; padding: 15px 0; overflow: hidden; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    .promo-text { display: inline-block; padding-left: 100%; animation: scroll-left 15s linear infinite; white-space: nowrap; font-weight: bold; font-size: 1.2rem; }
+    .price-highlight { color: #ffeb3b; font-size: 1.4rem; font-weight: bold; }
+    @keyframes scroll-left {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+    
+    /* CEO Portfolio Styles */
+    .ceo-portfolio { margin-top: 40px; }
+    .ceo-header { display: flex; gap: 30px; align-items: center; margin-bottom: 30px; }
+    .ceo-image { width: 220px; height: 220px; border-radius: 15px; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .ceo-intro h2 { color: #d32f2f; margin-top: 0; }
+    .ceo-intro h3 { color: #0d47a1; margin-bottom: 15px; }
+    .ceo-intro p { line-height: 1.6; margin-bottom: 15px; }
+    .ceo-quote { background: #e3f2fd; padding: 20px; border-left: 4px solid #d32f2f; font-style: italic; margin: 20px 0; border-radius: 0 8px 8px 0; }
+    .timeline { margin-top: 30px; }
+    .timeline-item { display: flex; margin-bottom: 25px; }
+    .timeline-date { min-width: 150px; font-weight: bold; color: #d32f2f; }
+    .timeline-content { flex: 1; }
+    .timeline-content h4 { margin-top: 0; color: #0d47a1; }
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .skill-tag { background: #ffebee; color: #d32f2f; padding: 8px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; }
+    .achievements { margin-top: 30px; }
+    .achievement-item { display: flex; align-items: center; margin-bottom: 15px; }
+    .achievement-icon { width: 30px; height: 30px; background: #d32f2f; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold; }
+    
+    /* Service Cards Hover Effect */
+    .card:hover { transform: translateY(-5px); transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(211, 47, 47, 0.2); }
+    .card h3 { color: #d32f2f; }
+    
+    /* Navigation Hover Effect */
+    nav a:hover { color: #ffeb3b; transition: color 0.3s ease; }
+    
+    /* Contact Section */
+    .contact-info { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }
+    .contact-item { flex: 1; min-width: 250px; background: #f5f5f5; padding: 15px; border-radius: 8px; }
+    .contact-item h3 { color: #d32f2f; margin-top: 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">FR<span>ATH</span></div>
+  <h1>FRATH INVESTMENTS</h1>
+  <p>Professional Motor Vehicle & Legal Services in Uganda</p>
+  <p class="tagline">Customer satisfaction is our number one priority</p>
+</header>
+
+<div class="promo-banner">
+  <div class="promo-text">🚗 MOTOR VEHICLE TRANSFER FOR AS LOW AS <span class="price-highlight">160K</span> UGX 🚗 | 📦 CUSTOMS CLEARANCE AT YOUR DOORSTEP 📦 | 🏠 LAND TRANSACTIONS AT YOUR CONVENIENCE 🏠 | 🚗 MOTOR VEHICLE TRANSFER FOR AS LOW AS <span class="price-highlight">160K</span> UGX 🚗</div>
+</div>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#about">About Us</a>
+  <a href="#portfolio">CEO Portfolio</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="hero" id="home">
+  <div class="slide active"><img src="https://z-cdn-media.chatglm.cn/files/f33f67cf-db80-4f16-8e24-5724f6e05537_vehicle%20importation.jpeg?auth_key=1863464385-d512d46f4615493abb492886f0ff6dea-0-9eb037b5d3ae30fb405eec97d58dfbad" alt="Vehicle importation"></div>
+  <div class="slide"><img src="https://z-cdn-media.chatglm.cn/files/38455785-e597-4f19-94d5-6eb413a69212_car%20hire.jpeg?auth_key=1863464385-4e4100f245cb4361b215f207c79a06f3-0-46ed6160d0bf17517c8ab6d213e9ac2d" alt="Car hire services"></div>
+  <div class="slide"><img src="https://z-cdn-media.chatglm.cn/files/11b2baf1-935e-484c-8d9e-073bd70f7108_digital%20number%20plate.jpeg?auth_key=1863464385-835dcd3c8eb5411d91a834c72876e30c-0-3fc1b60dc5fcc6edd4097624ecab4892" alt="Digital number plates"></div>
+</div>
+
+<section class="section" id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/46012269-c01e-4355-a24d-658f1360babe_cars%20for%20sale.jpeg?auth_key=1863464385-885554080ca94855be98bd3d35eec1cf-0-c5788b43296a85eda65b10a1e1513862" alt="Vehicle transfer">
+      <h3>Vehicle Transfer</h3>
+      <p>We handle URA logbook transfers and ownership changes. Special offer: Transfer services starting from just 160,000 UGX!</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/51d4992f-3bd7-4600-820a-d6204198c5cb_caveat%20land%20fixation.jpeg?auth_key=1863464385-b67320601711466d8bd74ad03caf7d13-0-b86538b12d8ed45673d714d99535713a" alt="Caveats">
+      <h3>Caveats</h3>
+      <p>Protect vehicle or land with legally filed caveats.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/f33f67cf-db80-4f16-8e24-5724f6e05537_vehicle%20importation.jpeg?auth_key=1863464385-d512d46f4615493abb492886f0ff6dea-0-9eb037b5d3ae30fb405eec97d58dfbad" alt="Importation & Customs">
+      <h3>Importation & Customs</h3>
+      <p>Clear imported vehicles at borders and through URA. Our extensive network of customs agents across Uganda and partnerships with shippers worldwide ensure seamless clearance of your vehicles from any country. We handle all documentation, taxes, and regulatory requirements efficiently.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/11b2baf1-935e-484c-8d9e-073bd70f7108_digital%20number%20plate.jpeg?auth_key=1863464385-835dcd3c8eb5411d91a834c72876e30c-0-3fc1b60dc5fcc6edd4097624ecab4892" alt="Number Plate Replacement">
+      <h3>Number Plate Replacement</h3>
+      <p>We help you replace with digital number plates.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/3d3126c3-61ec-4cda-ab97-6dfb323a629d_land%20title%202.jpeg?auth_key=1863464385-1631ce95947e45c29c3aee390406cebb-0-4ff6fa7d8bb6af182b4a9491577167fa" alt="Registry & URSB">
+      <h3>Registry & URSB</h3>
+      <p>Registers, company formation, land title work.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/34ed8531-636c-436c-9149-642bf0ccc854_land%20surveying%202.jpeg?auth_key=1863464385-7cafbbcdc6624f4980bc4e47ac49df7a-0-9335522227a328b3e0d65bfd5e64c004" alt="Tax Filing">
+      <h3>Tax Filing</h3>
+      <p>We support TIN, annual tax returns, and compliance.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/34ed8531-636c-436c-9149-642bf0ccc854_land%20surveying%202.jpeg?auth_key=1863464385-7cafbbcdc6624f4980bc4e47ac49df7a-0-9335522227a328b3e0d65bfd5e64c004" alt="Land Surveying">
+      <h3>Land Surveying</h3>
+      <p>Professional land surveying services for property boundaries and development planning.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/46012269-c01e-4355-a24d-658f1360babe_cars%20for%20sale.jpeg?auth_key=1863464385-885554080ca94855be98bd3d35eec1cf-0-c5788b43296a85eda65b10a1e1513862" alt="Used Vehicles">
+      <h3>Used Vehicles Sales</h3>
+      <p>Buy and sell quality used vehicles with transparent pricing and full documentation.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/3d3126c3-61ec-4cda-ab97-6dfb323a629d_land%20title%202.jpeg?auth_key=1863464385-1631ce95947e45c29c3aee390406cebb-0-4ff6fa7d8bb6af182b4a9491577167fa" alt="Brokerage">
+      <h3>Brokerage Services</h3>
+      <p>Professional brokerage for vehicles and property transactions with expert guidance.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/38455785-e597-4f19-94d5-6eb413a69212_car%20hire.jpeg?auth_key=1863464385-4e4100f245cb4361b215f207c79a06f3-0-46ed6160d0bf17517c8ab6d213e9ac2d" alt="Car Hire">
+      <h3>Car Hire Services</h3>
+      <p>We offer all kinds of cars for hire to suit your needs - from economy to luxury vehicles. Our services include convenient airport pickups with professional drivers, ensuring comfortable and reliable transportation throughout Uganda.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/f33f67cf-db80-4f16-8e24-5724f6e05537_vehicle%20importation.jpeg?auth_key=1863464385-d512d46f4615493abb492886f0ff6dea-0-9eb037b5d3ae30fb405eec97d58dfbad" alt="Customs Clearance">
+      <h3>Customs Clearance at Your Doorstep</h3>
+      <p>We bring customs clearance services directly to you! Our team comes to your location to handle all customs documentation, inspections, and clearance procedures. Save time and avoid the hassle of visiting multiple offices - we handle everything at your convenience.</p>
+    </div>
+    <div class="card">
+      <img src="https://z-cdn-media.chatglm.cn/files/fb55e410-852a-4216-80ec-3a0cf464faba_land%20title.jpeg?auth_key=1863464385-354ea1c30f2542d5b2f76b544035233f-0-f82457f44ae1d78655a056ebbb14a924" alt="Land Transactions">
+      <h3>Land Transactions at Your Convenience</h3>
+      <p>Complete land transactions from the comfort of your home or office. We offer mobile services for land title transfers, searches, and registrations. Our experts come to your preferred location to process all necessary paperwork, making property transactions seamless and stress-free.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2>About Us</h2>
+  <div class="team-member">
+    <img src="https://z-cdn-media.chatglm.cn/files/9aea0bc9-d4d9-4de2-b326-de87f8f1b29f_nabayiga%20meble.jpeg?auth_key=1863464385-994ba77ed38c43fabc62c1fab983a03e-0-d7bf3ea4c077e3ed16867900d0d63b8e" alt="Nabayiga">
+    <div>
+      <h3>Nabayiga</h3>
+      <p>Sales Executive</p>
+      <p>Nabayiga has 3+ years in tax business and adds valuable expertise to our team.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="portfolio">
+  <h2>CEO Portfolio</h2>
+  <div class="ceo-portfolio">
+    <div class="ceo-header">
+      <img src="https://via.placeholder.com/220x220?text=CEO" alt="CEO Photo" class="ceo-image">
+      <div class="ceo-intro">
+        <h2>Chief Executive Officer</h2>
+        <h3>Frath Investments</h3>
+        <p>A visionary leader with extensive experience in Uganda's motor vehicle and legal services sector. Our CEO has built a reputation for excellence, integrity, and innovative solutions in vehicle clearance, legal documentation, and property services.</p>
+        <div class="ceo-quote">
+          "Success in this industry requires not just expertise, but a commitment to transparency and client satisfaction. At Frath Investments, we don't just provide services; we build lasting relationships based on trust and results."
+        </div>
+      </div>
+    </div>
+    
+    <h3>Professional Journey</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2024 - Present</div>
+        <div class="timeline-content">
+          <h4>Founder & CEO, Frath Investments</h4>
+          <p>Established a comprehensive service company specializing in vehicle importation, legal documentation, land services, and tax compliance. Successfully grown client base through exceptional service delivery and strategic partnerships.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024</div>
+        <div class="timeline-content">
+          <h4>Governance and Controls Officer, I&M Bank</h4>
+          <p>Managed compliance frameworks and risk assessment protocols for one of Uganda's leading financial institutions. Developed expertise in regulatory compliance and internal controls.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2022 - 2024</div>
+        <div class="timeline-content">
+          <h4>Cash Center Officer, Centenary Bank</h4>
+          <p>Oversaw cash management operations and developed strong relationships with key stakeholders. Gained valuable experience in financial operations and customer service excellence.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2021</div>
+        <div class="timeline-content">
+          <h4>Legal Associate, Kentaro Mugerwa & Co</h4>
+          <p>Gained foundational experience in legal documentation, property law, and regulatory compliance. Developed expertise in title transfers and legal due diligence.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h3>Core Competencies</h3>
+    <div class="skills">
+      <span class="skill-tag">Vehicle Importation</span>
+      <span class="skill-tag">Customs Clearance</span>
+      <span class="skill-tag">Legal Documentation</span>
+      <span class="skill-tag">Property Law</span>
+      <span class="skill-tag">Tax Compliance</span>
+      <span class="skill-tag">Business Strategy</span>
+      <span class="skill-tag">Client Relations</span>
+      <span class="skill-tag">Regulatory Affairs</span>
+      <span class="skill-tag">Land Surveying</span>
+      <span class="skill-tag">Vehicle Brokerage</span>
+      <span class="skill-tag">Risk Management</span>
+      <span class="skill-tag">Governance</span>
+    </div>
+    
+    <h3>Key Achievements</h3>
+    <div class="achievements">
+      <div class="achievement-item">
+        <div class="achievement-icon">✓</div>
+        <div>Successfully processed over 1,000 vehicle importations with 100% compliance rate</div>
+      </div>
+      <div class="achievement-item">
+        <div class="achievement-icon">✓</div>
+        <div>Established strategic partnerships with major financial institutions and government agencies</div>
+      </div>
+      <div class="achievement-item">
+        <div class="achievement-icon">✓</div>
+        <div>Developed streamlined processes reducing documentation time by 40%</div>
+      </div>
+      <div class="achievement-item">
+        <div class="achievement-icon">✓</div>
+        <div>Recognized for excellence in customer service and operational efficiency</div>
+      </div>
+      <div class="achievement-item">
+        <div class="achievement-icon">✓</div>
+        <div>Built a network of over 500 satisfied clients across Uganda</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <img src="https://z-cdn-media.chatglm.cn/files/f33f67cf-db80-4f16-8e24-5724f6e05537_vehicle%20importation.jpeg?auth_key=1863464385-d512d46f4615493abb492886f0ff6dea-0-9eb037b5d3ae30fb405eec97d58dfbad" alt="Import work">
+    <img src="https://z-cdn-media.chatglm.cn/files/11b2baf1-935e-484c-8d9e-073bd70f7108_digital%20number%20plate.jpeg?auth_key=1863464385-835dcd3c8eb5411d91a834c72876e30c-0-3fc1b60dc5fcc6edd4097624ecab4892" alt="Digital number plate">
+    <img src="https://z-cdn-media.chatglm.cn/files/fb55e410-852a-4216-80ec-3a0cf464faba_land%20title.jpeg?auth_key=1863464385-354ea1c30f2542d5b2f76b544035233f-0-f82457f44ae1d78655a056ebbb14a924" alt="Land title">
+    <img src="https://z-cdn-media.chatglm.cn/files/38455785-e597-4f19-94d5-6eb413a69212_car%20hire.jpeg?auth_key=1863464385-4e4100f245cb4361b215f207c79a06f3-0-46ed6160d0bf17517c8ab6d213e9ac2d" alt="Car hire">
+    <img src="https://z-cdn-media.chatglm.cn/files/46012269-c01e-4355-a24d-658f1360babe_cars%20for%20sale.jpeg?auth_key=1863464385-885554080ca94855be98bd3d35eec1cf-0-c5788b43296a85eda65b10a1e1513862" alt="Cars for sale">
+    <img src="https://z-cdn-media.chatglm.cn/files/51d4992f-3bd7-4600-820a-d6204198c5cb_caveat%20land%20fixation.jpeg?auth_key=1863464385-b67320601711466d8bd74ad03caf7d13-0-b86538b12d8ed45673d714d99535713a" alt="Caveat service">
+    <img src="https://z-cdn-media.chatglm.cn/files/34ed8531-636c-436c-9149-642bf0ccc854_land%20surveying%202.jpeg?auth_key=1863464385-7cafbbcdc6624f4980bc4e47ac49df7a-0-9335522227a328b3e0d65bfd5e64c004" alt="Land surveying">
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+  <div class="contact-info">
+    <div class="contact-item">
+      <h3>Phone/WhatsApp</h3>
+      <p>Primary: 0757 838 714</p>
+      <p>Alternative: 0758 095 838</p>
+      <p>WhatsApp: 0761 334 372</p>
+    </div>
+    <div class="contact-item">
+      <h3>Office Hours</h3>
+      <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+      <p>Saturday: 9:00 AM - 4:00 PM</p>
+      <p>Sunday: Closed</p>
+    </div>
+    <div class="contact-item">
+      <h3>Location</h3>
+      <p>Nansana, Plot 134</p>
+      <p>Along Old Koba Road</p>
+      <p>Appointments available for in-person consultations</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">FR<span>ATH</span></div>
+  <p>&copy; 2025 Frath Investments. All Rights Reserved.</p>
+  <p>Customer satisfaction is our number one priority</p>
+</footer>
+
+<script>
+  let slides = document.querySelectorAll('.slide');
+  let current = 0;
+  function nextSlide() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }
+  setInterval(nextSlide, 4000);
+</script>
+
+</body>
+</html>
